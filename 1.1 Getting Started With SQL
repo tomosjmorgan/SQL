@@ -1,0 +1,27 @@
+echo "# SQL" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git branch -M main
+git remote add origin https://github.com/tomosjmorgan/SQL.git
+git push -u origin main
+
+CREATE TABLE friends(
+id INTEGER,
+name TEXT,
+birthday DATE
+);
+
+INSERT INTO friends (1, 'Jane Doe', '1990-05-30');
+
+INSERT INTO friends (2, 'Tally Doe', '2000-07-28');
+
+INSERT INTO friends (1, 'Harrison Doe', '2000-08-28');
+
+UPDATE friends
+SET name = 'Jane Smith'
+WHERE id = 1;
+
+SELECT * 
+FROM friends;
+
