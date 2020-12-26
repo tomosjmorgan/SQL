@@ -1,0 +1,52 @@
+SELECT *
+FROM places;
+
+SELECT *
+FROM reviews;
+
+SELECT *
+FROM places
+WHERE price_point == '$$'
+OR price_point == '$';
+
+SELECT *
+FROM places
+JOIN reviews 
+ON places.id == reviews.place_id;
+
+SELECT places.name, places.average_rating, reviews.username, reviews.rating, reviews.review_date, reviews.note
+FROM places
+INNER JOIN reviews 
+ON places.id == reviews.place_id;
+
+SELECT places.name, places.average_rating, reviews.username, reviews.rating, reviews.review_date, reviews.note
+FROM places
+LEFT JOIN reviews 
+ON places.id == reviews.place_id;
+
+SELECT places.id, places.name
+FROM places 
+LEFT JOIN reviews 
+   ON places.id = reviews.place_id
+WHERE reviews.place_id IS NULL;
+
+
+WITH Reviews_2020 AS (
+  SELECT *
+  FROM reviews
+  WHERE strftime("%Y", review_date) = "2020"
+) 
+    SELECT *
+    FROM Reviews_2020
+    JOIN places
+    ON places.id = Reviews_2020.place_id;
+
+SELECT ROUND(AVG(rating), 2)
+FROM reviews;
+
+SELECT username, AVG(rating)
+FROM reviews
+GROUP BY 1
+HAVING AVG(rating) < 3.34
+ORDER BY 2 ASC
+LIMIT 1;
