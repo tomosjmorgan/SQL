@@ -1,0 +1,38 @@
+SELECT *
+FROM startups;
+
+SELECT COUNT(*) AS 'No. Of Companies'
+FROM startups;
+
+SELECT SUM(valuation) AS 'Combined Valuation'
+FROM startups;
+
+SELECT name AS 'Max Raised Company', MAX(raised) AS 'Amount Raised'
+FROM startups;
+
+SELECT name AS 'Max Raised Company', MAX(raised) AS 'Amount Raised'
+FROM startups
+WHERE stage = 'Seed';
+
+SELECT name, min(founded)
+FROM startups;
+
+SELECT AVG(valuation)
+FROM startups;
+
+SELECT category, ROUND(AVG(valuation), 2)
+FROM startups
+WHERE valuation IS NOT NULL
+GROUP BY 1
+ORDER BY 2;
+
+SELECT category, COUNT(*)
+FROM startups
+WHERE category IS NOT NULL
+GROUP BY 1
+HAVING COUNT(*) > 3;
+
+SELECT location, AVG(employees)
+FROM startups 
+GROUP BY 1
+HAVING AVG(employees) > 500;
