@@ -1,0 +1,41 @@
+SELECT title, score
+FROM hacker_news
+ORDER BY score DESC
+LIMIT 5;
+
+SELECT SUM(SCORE)
+FROM hacker_news;
+
+SELECT user AS 'User', SUM(SCORE) AS 'Cumulative Score'
+FROM hacker_news
+GROUP BY 1
+HAVING SUM(score) > 200
+ORDER BY 2 DESC;
+
+SELECT ROUND((517.0 + 309.0 + 304.0 + 282.0) / 6366.0 * 100);
+
+SELECT user, COUNT(*)
+FROM hacker_news
+WHERE url LIKE '%https://www.youtube.com/watch?v=dQw4w9WgXcQ%'
+GROUP BY 1
+ORDER BY 2 DESC;
+
+SELECT CASE 
+    WHEN url LIKE '%github%' THEN 'GitHub'
+    WHEN url LIKE '%medium.com%' THEN 'Medium'
+    WHEN url LIKE '%nytimes.com%' THEN 'New York Times'
+    ELSE 'Other'
+  END AS 'Source', COUNT(*) AS 'Count'
+FROM hacker_news
+GROUP BY 1;
+
+SELECT timestamp
+FROM hacker_news
+LIMIT 10;
+
+SELECT timestamp AS 'Time of Posting',
+   strftime('%H', timestamp) AS 'Hour of Posting (24-Hour Time)', ROUND(AVG(score)) AS 'Average Score', COUNT(*) AS 'No. Stories Posted'
+FROM hacker_news
+WHERE timestamp IS NOT NULL
+GROUP BY 2
+ORDER BY 2;
