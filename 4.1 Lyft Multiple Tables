@@ -1,0 +1,47 @@
+SELECT * 
+FROM trips
+LIMIT 10;
+
+SELECT * 
+FROM riders
+LIMIT 10;
+
+SELECT * 
+FROM cars
+LIMIT 10;
+
+SELECT riders.first, riders.last, cars.model 
+FROM riders
+CROSS JOIN cars;
+
+SELECT trips.rider_id, trips.date, trips.pickup, trips.dropoff, riders.first, riders.last
+FROM trips
+LEFT JOIN riders
+ON trips.rider_id = riders.id;
+
+SELECT trips.id AS 'Trip ID', trips.car_id, trips.date, trips.pickup, trips.dropoff, cars.model, cars.OS, cars.status
+FROM trips
+INNER JOIN cars
+  ON trips.car_id = cars.id;
+
+SELECT * 
+FROM riders
+UNION
+SELECT *
+FROM riders2;
+
+SELECT ROUND(AVG(cost), 2)
+FROM trips;
+
+SELECT *
+FROM riders
+WHERE total_trips < 500;
+
+SELECT COUNT(*) AS 'Active Cars Totak'
+FROM cars
+WHERE status = 'active';
+
+SELECT *
+FROM cars
+ORDER BY trips_completed DESC
+LIMIT 2;
