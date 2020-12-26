@@ -1,0 +1,73 @@
+SELECT * 
+FROM users
+LIMIT 10;
+
+SELECT * 
+FROM posts
+LIMIT 10;
+
+SELECT * 
+FROM subreddits
+LIMIT 10;
+
+SELECT COUNT(*) AS 'Subreddits Counter'
+FROM subreddits;
+
+SELECT id, username, score 
+FROM users
+ORDER BY 3 DESC
+LIMIT 1;
+
+SELECT id, title, score
+FROM posts
+ORDER BY 3 DESC
+LIMIT 1;
+
+SELECT name, subscriber_count
+FROM subreddits 
+ORDER BY 2 DESC
+LIMIT 5;
+
+
+SELECT username, COUNT(*)
+FROM users
+LEFT JOIN posts
+ON users.id = posts.user_id
+AND username IS NOT NULL
+GROUP BY 1
+ORDER BY 2 DESC
+LIMIT 10;
+
+SELECT *
+FROM posts
+INNER JOIN users 
+ON posts.user_id = users.id
+LIMIT 10;
+
+SELECT *
+FROM posts
+UNION 
+SELECT *
+FROM posts2;
+
+SELECT posts.title, posts.score, subreddits.name
+FROM posts
+JOIN subreddits
+ON posts.subreddit_id = subreddits.id
+AND score > 5000
+ORDER BY score DESC
+LIMIT 10;
+
+SELECT posts.title AS 'Post Name', subreddits.name AS 'Subreddit Name', MAX(posts.score) AS 'Highest Score'
+FROM posts
+INNER JOIN subreddits
+ON posts.subreddit_id = subreddits.id
+GROUP BY subreddits.id
+ORDER BY 3 DESC;
+
+SELECT posts.title AS 'Post Name', subreddits.name AS 'Subreddit Name', ROUND(AVG(posts.score)) AS 'Average Score'
+FROM posts
+INNER JOIN subreddits
+ON posts.subreddit_id = subreddits.id
+GROUP BY subreddits.id
+ORDER BY 3 DESC;
